@@ -1,18 +1,18 @@
+import "./homepage.css";
 export function Homepage() {
     return(
         <>
           <Nav />
-          <div>
+          <div className="search-user"> 
             <h2>
                 Search  user by username
             </h2>
-            <form>
-                <input type="text" placeholder="Enter username" />
-                <button type="submit">Search</button>
-            </form>
+            <br />
+                <input type="text" placeholder="Enter username"  id ="input"/>
+                <button type="submit" id ="btn">Search</button>
           </div>
-          <div>
-            <h2>searched user details</h2>
+          <div className="searched-user-details">
+            <h2>Searched user details</h2>
             <div></div>
           </div>
          </>
@@ -21,7 +21,7 @@ export function Homepage() {
 export function Nav(){
     return(
         <>
-          <nav>
+          <nav className="navbar">
             <ul>
               <li>Home</li>
               <li>About</li>
