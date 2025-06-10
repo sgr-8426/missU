@@ -1,6 +1,4 @@
 import "./homepage.css";
-import { Nav } from "../components/nav";
-import { Input } from "../components/Input";
 export function HomePage() {
     return(
         <>
@@ -17,5 +15,19 @@ export function HomePage() {
             <div></div>
           </div>
          </>
+    )
+}
+export function Nav(){
+    return(
+        <>
+          <nav className="navbar">
+            <h1 className="logo">missU</h1>
+            <ul>
+              <li>Home</li>
+              <li>About</li>
+              <li>Contact</li>
+            </ul>
+          </nav>
+        </>
     )
 }

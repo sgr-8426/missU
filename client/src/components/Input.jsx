@@ -1,13 +1,18 @@
 import "./input.css";
 export function Input({ type, placeholder }) {
+    const inputId = `input-${type}`;
     return (
-        <>
-            <div class="group">
-            <input required="" type={type} class="input" />
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label>{placeholder}</label>
+        <div className="email-input-container">
+            <input 
+                type={type} 
+                id={inputId} 
+                required="" 
+            />
+            <label htmlFor={inputId}>{placeholder}</label>
+            <div className="email-input-border">
+                <span className="email-input-border-left"></span>
+                <span className="email-input-border-right"></span>
             </div>
-        </>
+        </div>
     )
 }
