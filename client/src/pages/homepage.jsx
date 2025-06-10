@@ -7,7 +7,7 @@ export function HomePage() {
             <h2>
                 Search  user by username
             </h2>
-            <Input type="text" placeholder="Enter username" />
+            <input type="text" placeholder="Enter username" />
                 <button type="submit" id ="btn">Search</button>
           </div>
           <div className="searched-user-details">
