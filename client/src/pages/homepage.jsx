@@ -1,5 +1,5 @@
 import "./homepage.css";
-export function Homepage() {
+export function HomePage() {
     return(
         <>
           <Nav />
@@ -22,6 +22,7 @@ export function Nav(){
     return(
         <>
           <nav className="navbar">
+            <h1 className="logo">missU</h1>
             <ul>
               <li>Home</li>
               <li>About</li>
