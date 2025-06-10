@@ -1,6 +1,6 @@
 import { Nav } from "../pages/homepage"
 import "./LogIn.css";
-export function LoginPage() {
+export function Register() {
     return(
         <>
             <Nav />
