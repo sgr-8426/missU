@@ -15,7 +15,7 @@ export function Register() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    setPreview(URL.createObjectURL(file)); // show preview
+    setPreview(URL.createObjectURL(file));
   };
 
   const handleSubmit = (e) => {
@@ -24,10 +24,21 @@ export function Register() {
     const emailId = emailIdRef.current.value;
     const password = passwordRef.current.value;
     const reenter = reenterRef.current.value;
+    const file = fileInputRef.current.files[0];
     if (password != reenter) {
       alert("password does not match");
       return;
     }
+    const formData = new FormData();
+    formData.append("email", emailId);
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("profile", file); // append the image file
+
+    fetch("http://localhost:5000/api/auth/signup", {
+      method: "POST",
+      body: formData,
+    })
     console.log(username, emailId, password, reenter);
     usernameRef.current.value="";
     emailIdRef.current.value="";
