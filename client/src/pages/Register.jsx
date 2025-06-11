@@ -62,7 +62,7 @@ export function Register() {
           onChange={handleImageChange}
           accept="image/*"
           ref={fileInputRef
-            
+
           }
         />
         <label htmlFor="username">Username</label>
@@ -88,7 +88,7 @@ export function Register() {
           placeholder="Enter Your Password"
           ref={passwordRef}
         />
-        <label htmlFor="Reepassword">Password</label>
+        <label htmlFor="Reepassword">Renter Password</label>
         <input
           name="Repassword"
           type="password"
@@ -96,14 +96,6 @@ export function Register() {
           ref={reenterRef}
           required
         />
-        <div className="remember">
-          <input
-            name="remember"
-            type="checkbox"
-            required
-          />
-          <label htmlFor="remember">Remember Me</label>
-        </div>
         <button type="submit">Login</button>
       </form>
     </>

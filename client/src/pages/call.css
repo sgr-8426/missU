@@ -1,0 +1,62 @@
+.call {
+    position: relative;  
+    width: 100%;
+    height: 100vh;         
+    border: 2px solid black; 
+    border-radius: 5px;
+    overflow: hidden;      
+}
+
+#called {
+    width: 100%;
+    height: 100%;
+    background-color: aquamarine;
+}
+
+#receiver {
+    position: absolute;
+    right: 10px;
+    bottom: 100px;    
+    width: 300px;
+    height: 200px;
+    background-color: aqua;
+}
+
+.btns {
+    position: absolute;
+    bottom: 20px;             
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.btnStyle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3f51b5;
+    border: 1px solid black;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.endBtnStyle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f44336;
+    border: 1px solid black;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
