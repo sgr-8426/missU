@@ -107,7 +107,7 @@ export function Register() {
           ref={reenterRef}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </>
   );

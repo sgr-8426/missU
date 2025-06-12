@@ -19,6 +19,10 @@ export function LoginPage() {
             },
             body: JSON.stringify({ username, password, remember }),
         })
+        usernameRef.current.value="";
+        passwordRef.current.value="";
+        rememberRef.current.value="";
+
     }
 
     return (

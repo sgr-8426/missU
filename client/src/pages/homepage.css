@@ -157,6 +157,12 @@ input:hover {
   border-radius: 12px;
   animation: fadeIn 0.6s ease;
 }
+li a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+}
 
 .logo:hover,
 .home:hover,
@@ -200,16 +206,47 @@ input:hover {
 
 /* Responsive Media Query */
 @media (max-width: 768px) {
-  .navbar ul {
+  .navbar {
     flex-direction: column;
-    height: auto;
+    align-items: stretch;
+  }
+
+  .navbar ul {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .navbar ul li {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
   }
 
   .user-info {
-    flex-direction: column;
-    align-items: flex-end;
-    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin: 10px;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
+
+  .user-info span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .profile-pic {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 
   .search-user,
   .searched-user-details,
@@ -221,39 +258,218 @@ input:hover {
   .logo {
     font-size: 18px;
   }
-}
-.call-notification {
+
+.call-Notification {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #fff7e6;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #fffdf5, #f8f1dd);
   border: 2px solid #95A78D;
-  padding: 15px 20px;
-  border-radius: 10px;
-  animation: fadeIn 0.5s ease-in-out;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  padding: 18px 24px;
+  border-radius: 16px;
+  z-index: 9999;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeInTop 0.6s ease-out;
+  min-width: 280px;
+  max-width: 90%;
+  text-align: center;
 }
 
-.call-content p {
-  font-size: 16px;
-  margin-bottom: 10px;
+/* Add new animation */
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .button-group button {
-  margin: 0 8px;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
   border: none;
   cursor: pointer;
-  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 }
 
 .receive {
   background-color: #4caf50;
-  color: white;
+  color:white;
+  border: none;
+  transition:all 0.3s ease-in-out ;
+}
+.receive:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
 }
 
 .reject {
   background-color: #f44336;
-  color: white;
+  color:white;
+  border: none;
+  transition:all 0.3s ease-in-out ;
+}
+.reject:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.6);
+}
+/* Modern Responsive Enhancements */
+@media (max-width: 1024px) {
+  .navbar ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .navbar ul li {
+    font-size: 18px;
+    padding: 10px 12px;
+  }
+
+  .user-info {
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-user h2,
+  .searched-user-details h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .inputandbutton {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 15px;
+  }
+
+  #btn {
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .searched-user-details {
+    margin-top: 15px;
+  }
+
+  .show-user-details {
+    width: 100%;
+  }
+
+  .call-Notification {
+    width: 95%;
+    font-size: 16px;
+    padding: 16px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  #username {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  #img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar ul li {
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .search-user,
+  .searched-user-details,
+  .show-user-details {
+    padding: 12px;
+  }
+
+  .call-Notification {
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .button-group button {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px;
+    justify-content: flex-start;
+    scrollbar-width: none; /* hide scrollbar in Firefox */
+  }
+
+  .navbar ul::-webkit-scrollbar {
+    display: none; /* hide scrollbar in Chrome/Safari */
+  }
+
+  .navbar ul li {
+    flex: 0 0 auto;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .logo {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
 }
