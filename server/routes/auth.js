@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const User = require("../models/user");
 const upload = require("../utils/upload")
+const session = require("express-session");
 
 const JWT_SECRET = "abc123";
 
@@ -44,11 +45,19 @@ router.post("/login", async (req, res) => {
     const time = "1h"
     if (req.body.remember) {
       time = "30d";
-    }
+      let token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: time });
+      res.status(200).cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+      maxAge: 2592000000, // 1 hour or 30 days in milliseconds
+    });
+  }else{
+    let token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: time })
+    req.session.jwt = token;
+    res.status(200)
+  }
 
-    const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: time });
-
-    res.status(200).json({ token, user: { username: user.username, email: user.email } });
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }

@@ -18,6 +18,10 @@ export function LoginPage() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ username, password, remember }),
+        }).then((res) => {
+            res.json().then((data) => {
+                
+            })
         })
         usernameRef.current.value="";
         passwordRef.current.value="";

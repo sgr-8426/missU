@@ -1,16 +1,18 @@
 import { Nav } from "../pages/homepage";
 import "./LogIn.css";
 import { useRef, useState } from "react";
-export function Register() {
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
+import { useNavigate } from 'react-router-dom'
 
+export function Register() {
+  const nav = useNavigate();
   const usernameRef = useRef();
   const emailIdRef = useRef();
   const passwordRef = useRef();
   const reenterRef = useRef();
   const fileInputRef = useRef();
 
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -20,8 +22,6 @@ export function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const username = usernameRef.current.value;
-    const emailId = emailIdRef.current.value;
     const password = passwordRef.current.value;
     const reenter = reenterRef.current.value;
     const file = fileInputRef.current.files[0];
@@ -30,51 +30,44 @@ export function Register() {
       return;
     }
     const formData = new FormData();
-    formData.append("email", emailId);
-    formData.append("username", username);
+    formData.append("email", emailIdRef.current.value);
+    formData.append("username", usernameRef.current.value);
     formData.append("password", password);
-    formData.append("profile", file); // append the image file
+    formData.append("profile", file);
 
     fetch("http://localhost:5000/api/auth/signup", {
       method: "POST",
       body: formData,
+    }).then((res) => {
+      if (res.status == 201 || res.status == 400) {
+        nav("/login");
+      } else {
+        alert("Something went wrong, please try again later");
+      }
     })
-    console.log(username, emailId, password, reenter);
-    usernameRef.current.value="";
-    emailIdRef.current.value="";
-    passwordRef.current.value="";
-    reenterRef.current.value="";
+
+    usernameRef.current.value = "";
+    emailIdRef.current.value = "";
+    passwordRef.current.value = "";
+    reenterRef.current.value = "";
     setImage(null);
     setPreview(null);
     fileInputRef.current.value = "";
   };
-  const style={
-        display: "flex",
-        justifyContent: "center",     
-        alignItems: "center",             
-        width: "150px",
-        height: "150px",
-        borderRadius: "50%",         
-        overflow: "hidden",          
-        backgroundColor: "#eee",        
-        margin: "auto"                
-      };
   return (
     <>
       <Nav />
       <form className="form" onSubmit={handleSubmit}>
         <h1>Register</h1>
         <label htmlFor="Profile Picture">Profile Picture</label>
-        {preview && <img src={preview} alt="preview" width="200" style={style} />}
+        {preview && <img id="img-preview" src={preview} alt="preview" width="200" />}
         <input
           name="Profile Picture"
           type="file"
           placeholder="Enter Your Profile Picture"
           onChange={handleImageChange}
           accept="image/*"
-          ref={fileInputRef
-
-          }
+          ref={fileInputRef}
         />
         <label htmlFor="username">Username</label>
         <input

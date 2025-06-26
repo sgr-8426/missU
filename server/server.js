@@ -12,6 +12,16 @@ app.use(express.urlencoded({ extended: true }));
 
 const authRoutes = require("./routes/auth")
 app.use("/api/auth", authRoutes);
+app.use(session({
+  secret: "abc123", // use a strong secret in production
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60, // 1 hour
+    sameSite: "Lax",        // or "Strict"/"None"
+    secure: false           // set to true if using HTTPS
+  }
+}));
 
 mongoose.connect("mongodb://127.0.0.1:27017/missU")
 .then(() => {
