@@ -2,16 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const session = require('express-session')
 
 dotenv.config();
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use("/images", express.static("images"));
-app.use(express.urlencoded({ extended: true }));
 
-const authRoutes = require("./routes/auth")
-app.use("/api/auth", authRoutes);
+app.use(express.json())
+app.use(cors({
+  origin: "http://localhost:5173", // Your frontend URL
+  credentials: true               // Allow cookies
+}));
+app.use("/images", express.static("images"));
 app.use(session({
   secret: "abc123", // use a strong secret in production
   resave: false,
@@ -22,6 +23,9 @@ app.use(session({
     secure: false           // set to true if using HTTPS
   }
 }));
+
+const authRoutes = require("./routes/auth")
+app.use("/api/auth", authRoutes);
 
 mongoose.connect("mongodb://127.0.0.1:27017/missU")
 .then(() => {

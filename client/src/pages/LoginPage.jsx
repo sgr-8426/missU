@@ -1,32 +1,52 @@
 import { Nav } from "../pages/homepage"
 import "./LogIn.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function LoginPage() {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const rememberRef = useRef();
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
 
     async function handleLogin(e) {
         e.preventDefault();
+        setError("");
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
-        const remember = rememberRef.current.value;
-        const response = await fetch("http://localhost:5000/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password, remember }),
-        }).then((res) => {
-            res.json().then((data) => {
-                
-            })
-        })
-        usernameRef.current.value="";
-        passwordRef.current.value="";
-        rememberRef.current.value="";
+        const remember = rememberRef.current.checked;
+        
+        try {
+            const response = await fetch("http://localhost:5000/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({ username, password, remember })
+            });
 
+            const data = await response.json();
+            
+            if (!data.success) {
+                setError(data.message);
+                return;
+            }
+
+            // Store user data in localStorage or context if needed
+            localStorage.setItem("user", JSON.stringify(data.user));
+            
+            // Clear form
+            usernameRef.current.value = "";
+            passwordRef.current.value = "";
+            rememberRef.current.checked = false;
+            
+            // Redirect to homepage
+            navigate("/");
+        } catch (err) {
+            setError("An error occurred. Please try again.");
+        }
     }
 
     return (
@@ -44,6 +64,7 @@ export function LoginPage() {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            {error && <div className="error-message">{error}</div>}
         </>
     )
 }
